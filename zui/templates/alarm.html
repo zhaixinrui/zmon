@@ -1,0 +1,131 @@
+$def with (username, products, homedomain)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Zmon - 报警信息</title>
+
+<script src="/static/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+<!-- bootstrap使用的js和css -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/docs.css" rel="stylesheet" media="screen">
+<!-- bootstrap使用的js和css -->
+<!-- jqgrid使用的js和css -->
+<script src="/static/jqgrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
+<script src="/static/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<link href="/static/jqgrid/css/ui-lightness/jquery-ui-custom.css" rel="stylesheet" />
+<link href="/static/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
+<!-- jqgrid使用的js和css -->
+<script src="/static/js/alarm.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--  导航条  -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="pull-left brand" href="#">Zmon</a>
+	  <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li><a href="/zmon/">流量展示</a></li>
+          <li><a href="/zmon/flowstat">流量统计</a></li>
+		  <li><a href="/zmon/manage">监控管理</a></li>
+		  <li class="active"><a href="/zmon/alarm">报警管理</a></li>
+		  <li><a href="/zmon/create">监控新增</a></li>
+		</ul>
+        <ul class="nav pull-right">
+		  <li><a>欢迎你，$username</a></li>
+		  <li><a href="/zmon/logout">退出</font></a></li>
+        </ul>
+	  </div><!--/.nav-collapse -->
+	</div>
+  </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+<h5> &nbsp </h5>
+</div>
+
+<!--  正文  -->
+<div class="container">
+    <div class="row-fluid">
+        <!--Sidebar content-->
+        <div class="span3 bs-docs-sidebar">
+            <ul class="nav nav-list bs-docs-sidenav affix">
+                <li class="active"><a href="#">请选择产品线</a></li>
+                $for product in products:
+                    <li><a class="a_product" href="javascript:void(0)"><i class="icon-chevron-right"></i>$product</a></li>
+            </ul>
+        </div>
+        <!--Body content-->
+        <div class="span9">
+            <!--监控策略配置-->
+            <div class="row">
+                <div class="span12">
+                    <h3 class="text-center text-top">监控策略配置</h3>
+                    <div class="row">
+                        <div class="span1 offset10">
+                            <input type="BUTTON" class="btn btn-primary" id="add_threshold" value="新增配置" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span11 offset1">
+                            <table id="threshold_list"><tr><td/></tr></table> 
+                            <div id="threshold_pager"></div> 
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!--报警接收人配置-->
+            <div class="row">
+                <div class="span12">
+                    <h3 class="text-center text-top">报警接收人配置</h3>
+                    <div class="row">
+                        <div class="span1 offset10">
+                            <input type="BUTTON" class="btn btn-primary" id="add_receiver" value="新增配置" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span11 offset1">
+                            <table id="receiver_list"><tr><td/></tr></table> 
+                            <div id="receiver_pager"></div> 
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!--白名单配置-->
+            <div class="row">
+                <div class="span12">
+                    <h3 class="text-center text-top">白名单配置</h3>
+                    <div class="row">
+                        <div class="span1 offset10">
+                            <input type="BUTTON" class="btn btn-primary add_conf" id="add_whitelist" value="新增配置" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span11 offset1">
+                            <table id="whitelist_list"><tr><td/></tr></table> 
+                            <div id="whitelist_pager"></div> 
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer >
+        <p class="pull-center">© Company 2013</p>
+    </footer>
+</div>
+</body>
+</html>

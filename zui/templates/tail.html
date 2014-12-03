@@ -1,0 +1,67 @@
+$def with (username)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Zmon - 流量展示</title>
+<script src="/static/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+<!-- bootstrap使用的js和css -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-dropdown.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/docs.css" rel="stylesheet" media="screen">
+<!-- bootstrap使用的js和css -->
+
+<!-- <script src="http://10.38.45.17:8081/websocket.js"></script> -->
+<script src="/static/js/websocket.js"></script>
+
+</head>
+<!--<body onload="getProduct()">-->
+<body>
+<!--  导航条  -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="pull-left brand" href="#">Zmon</a>
+	  <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li><a href="/zmon/">流量展示</a></li>
+          <li><a href="/zmon/flowstat">流量统计</a></li>
+		  <li><a href="/zmon/manage">监控管理</a></li>
+		  <li><a href="/zmon/alarm">报警管理</a></li>
+		  <li><a href="/zmon/create">监控新增</a></li>
+		  <li class="active"><a href="/static/beizhu.html">日志查看</a></li>
+		</ul>
+        <ul class="nav pull-right">
+		  <li><a>欢迎你，$username</a></li>
+		  <li><a href="/zmon/logout">退出</font></a></li>
+        </ul>
+	  </div><!--/.nav-collapse -->
+	</div>
+  </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+    <h5> &nbsp </h5>
+</div>
+
+<div class="container">
+     <div class="row-fluid">
+         <div class="span12" id="nav" style="overflow:auto;">
+             <input type="TEXT" id="hostip">
+             <button class="btn" onclick="connect()">连接</button>
+             <ul id="treeview" class="tree"></ul>
+         </div>
+     </div>
+</div>
+
+</body>
+<html>

@@ -1,0 +1,15 @@
+#数据库配置项
+mysql:
+    ip: '10.57.105.15'
+    port: '3306'
+    user: 'root'
+    pass: 'root'
+#日志配置项
+log:
+    name: 'zcm.log'
+    level: 'DEBUG'
+#程序监听端口
+listenport: 7999
+#负责处理的产品线
+products:
+    - test

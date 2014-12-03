@@ -1,0 +1,17 @@
+#-*- encoding: gb2312 -*-
+
+mysql - zmon存放配置文件的数据库
+nginx - zmon使用的webserver
+python- zmon使用的python，所有python依赖的库都放在改文件夹下的lib中
+redis - zmon使用的内存存储系统，采集的数据全部放在该缓存中
+redisproxy - redis的代理，只要是为了redis分布式部署
+scripts - 操作redis的一些接口，均为python语言
+webroot - nginx的documentRoot，里面存放了一些js和css，和静态页
+zcm - zmon的提交接口，各机器上采集的数据统一提交给zcm来处理
+monflow - zmon的流量监控模块，目前还未完成
+zlist - 生成页面左侧树形菜单的模块，需手动调用该模块的update方法菜单才能更新
+zmonbackup - zmon依赖库的源码，主要做备份用
+zpush - 用来处理zcm接受到的数据，并把数据提交给redis
+zui - 处理nginx转发来的请求，为wscgi模式 
+
+

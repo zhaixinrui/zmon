@@ -1,0 +1,162 @@
+html {
+    overflow-y:auto;
+}
+body{
+font: 200 12px/16px 'Microsoft YaHei',Tohoma,arial;
+color:#808080;
+} 
+
+ul,ol {
+margin:0; 
+list-style:none;
+}
+
+table, label, input, select, textarea{
+font: 200 12px/16px 'Microsoft YaHei',Tohoma,arial;
+}
+
+table.simple {
+    font-size:12px;
+    line-height:16px;
+}
+
+.actions {
+padding: 9px 20px 10px 150px;
+}
+.btn,
+.rule .btn {
+    font-size:12px;
+}
+
+.btn.active {
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.btn.left {
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    -moz-border-radius-topright:0;
+    -moz-border-radius-bottomright:0;
+}
+
+.btn.right {
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    -moz-border-radius-topleft:0;
+    -moz-border-radius-bottomleft:0;
+}
+
+.btn.center {
+    border-radius: 0;
+    -moz-border-radius:0;
+}
+
+
+/**  label **/
+.label.warm {
+background-color:#FEE9CC; 
+color:#404040;
+}
+
+/** jquery font **/
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family:'Microsoft YaHei',Tohoma,arial;
+}
+
+
+/** topbar **/
+.topbar input{
+    background-color:#444;
+    background-color:rgba(255, 255, 255, 0.3);
+    font-family: 'Microsoft YaHei',Tohoma,arial;
+    font-size:normal;
+    font-weight:13px;
+    line-height:1;
+padding:4px 9px;
+color:#fff;
+color:rgba(255, 255, 255, 0.75);
+border:1px solid #111;
+       -webkit-border-radius:4px;
+       -moz-border-radius:4px;
+       border-radius:4px;
+       -webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+       -moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+       box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+       -webkit-transition:none;
+       -moz-transition:none;
+        transition:none;
+}
+
+.topbar input:-moz-placeholder{color:#e6e6e6;} 
+
+
+h1 {
+font-size:18px;
+}
+h3 {
+    font-size:16px;
+}
+fieldset legend {
+    font-size:14px;
+}
+input[type=text], select, textarea {
+    font-weight:normal;
+color:#444;
+}
+
+.tabs > li > a {
+    outline: none;
+}
+
+
+.user_name_suggest,
+.cvs_path {
+font-weight:bold;
+color:#444;
+}
+
+
+.juge_list_item .input {
+    margin-left: 20px;
+}
+.alarm_rule_option label.width-auto,
+.width-auto-wrap label.width-auto {
+width:auto;
+}
+.input.no_label_whitespace {
+    margin-left: 0px;
+}
+
+.label_outer [class*="span"] {
+   margin-left:0; 
+}
+
+
+.label {
+font-size:inherit;
+}
+
+.label_outer em {
+color:#0187C5;
+}
+
+/** **/
+.breadcrumb .cur_step a {
+color:#0069D6;
+}
+
+.help-block strong {
+    color: #575757;
+}
+.help-block em {
+    margin-left:2px;margin-right:2px;
+}
+
+
+.special.left { border-right:0; padding-right:0; border-top-right-radius: 0 ; border-bottom-right-radius:0;}
+.special.right { border-left:0; padding-left:0; border-top-left-radius: 0 ; border-bottom-left-radius:0 ;  }
+input.wa { width: auto; }

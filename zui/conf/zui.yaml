@@ -1,0 +1,20 @@
+#数据库配置项
+mysql:
+    ip: '10.57.105.15'
+    port: '3306'
+    user: 'root'
+    pass: 'root'
+
+redis_ip: 10.81.40.205 
+redis_port: 6370
+default_push_time:
+  - [10, 4000]
+  - [180, 4000]
+  - [3600, 4000]
+  - [86400, 4000]
+push_time:
+    '/zmon/monflow/space/imgcm':
+      - [10, 4000]
+      - [180, 4000]
+      - [3600, 4000]
+      - [86400, 4000]

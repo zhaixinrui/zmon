@@ -1,0 +1,167 @@
+$def with (username, products, homedomain)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Zmon - 监控管理</title>
+<script src="/static/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+<!-- bootstrap使用的js和css --> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/docs.css" rel="stylesheet" media="screen">
+<!-- bootstrap使用的js和css -->
+<!-- jqgrid使用的js和css -->
+<script src="/static/jqgrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
+<script src="/static/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<link href="/static/jqgrid/css/ui-lightness/jquery-ui-custom.css" rel="stylesheet" />
+<link href="/static/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
+<!-- jqgrid使用的js和css -->
+<script src="/static/js/create.js" type="text/javascript"></script>
+<script src="/static/js/manager.js" type="text/javascript"></script>
+</head>
+
+
+<body>
+<!--  导航条  -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="pull-left brand" href="#">Zmon</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><a href="/zmon/">流量展示</a></li>
+          <li><a href="/zmon/flowstat">流量统计</a></li>
+          <li class="active"><a href="/zmon/manage">监控管理</a></li>
+          <li><a href="/zmon/alarm">报警管理</a></li>
+          <li><a href="/zmon/create">监控新增</a></li>
+        </ul>
+        <ul class="nav pull-right">
+          <li><a>欢迎你，$username</a></li>
+          <li><a href="/zmon/logout">退出</font></a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+<h5> &nbsp </h5>
+</div>
+
+<!--  正文  -->
+<div class="container">
+    <!--  按钮  -->
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="input-append">
+                <input class="span10" type="text" placeholder="模块名、所属产品线、日志名等" name="token" id="mask" onkeydown="javascript:if(event.keyCode==13){search()}">
+                <button class="btn" onclick="search()">搜索</button>
+		        <button class="btn" onclick="reset()">重置</button>
+            </div>
+        </div>
+        <div class="span6 text-right">
+            <div class="input-append">
+        		<select id="productline" name="select">
+                    <option value ="null">选择产品线</option>
+                    <!--<option value ="ALL_PRODUCT">所有</option>-->
+                    $for product in products:
+                        <option value ="$product">$product</option>
+                </select>
+        	    <button id='updataListBtn' class="btn btn-info" onclick="updateList()">更新树形菜单</button>
+        	    <button class="btn btn-success" onclick=get("/zmon/create")>监控新增</button>
+        	    <button class="btn btn-danger" onclick="deleteMonitor()">批量删除</button>
+            </div>
+        </div>
+    </div>
+    <!--  监控信息表  -->
+    <div class="row-fluid">
+        <div class="span12 text-center">
+            <table id="list"><tr><td/></tr></table> 
+            <div id="pager"></div> 
+        </div>
+    </div>
+    <!--  填坑  -->
+    <div class="row-fluid">
+        <div class="span12">
+            <h5> &nbsp </h5>
+        </div>
+    </div>
+    <!--  详细表  -->
+    <div class="row-fluid">
+        <div class="span6">
+            <table id="detailhostlist"><tr><td/></tr></table> 
+            <div id="detailhostpager"></div> 
+        </div>
+        <div class="span6 ">
+            <table id="detailregularlist"><tr><td/></tr></table>
+            <div id="detailregularpager"></div>
+        </div>
+    </div>
+</div>
+
+<!--  填坑  -->
+<div class="row-fluid">
+    <div class="span12">
+        <h5> &nbsp </h5>
+    </div>
+</div>
+
+<!--  页脚  -->
+<div id="footer" class="navbar-fixed-bottom" style="background-color: #f5f5f5;height: 20px;">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span2 offset5">
+                <p class="muted credit">开发支持 ksn-op;
+                <a href="mailto:zhaixinrui01@baidu.com">联系我们</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  监控编辑浮层  -->
+<div id="editMonitorDiv" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- style="width:1000px;margin:0 0 0 -500px;"> -->
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3>修改监控项</h3>
+      </div>
+      <div class="modal-body">
+          <h4>模块基本信息</h4>
+          <div class="row-fluid"> 
+              <div class="span2"> <label>监控项名</label> </div> 
+              <div class="span2"> <input id="monitorname" disabled="true"/> </div> 
+          </div>
+          <div class="row-fluid"> 
+              <div class="span2"> <label>日志路径</label> </div> 
+              <div class="span2"> <input id="logpath"/> </div> 
+          </div>
+          <div class="row-fluid"> 
+              <div class="span2"> <label>机器列表</label> </div> 
+              <div class="span2"> <textarea id="hostlist"></textarea> </div> 
+          </div>
+          <div class="row-fluid"> 
+              <div class="span2"> <label>提取内容</label> </div> 
+              <div class="span2"> <input id="grep" maxlength="255"/> </div> 
+          </div>
+          <div class="row-fluid"> 
+              <div class="span2"> <label>过滤内容</label> </div> 
+              <div class="span2"> <input id="grep-v"/> </div> 
+          </div>
+          <h4>正则表达式</h4>
+          <h4>图表设置</h4>
+          <h4>菜单设置</h4>
+      </div>
+      <div class="modal-footer">
+           <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+           <button class="btn btn-primary" onclick=saveChanges(1)>保存</button>
+      </div>
+</div>
+</body>
+</html>

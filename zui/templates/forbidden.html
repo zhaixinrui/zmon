@@ -1,0 +1,82 @@
+$def with (username)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Zmon - 流量展示</title>
+<script src="/static/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/static/css/reset.css" type="text/css">
+<link rel="stylesheet" href="/static/css/jquery-ui/jquery-ui-1.8.10.custom.css" type="text/css">
+<link rel="stylesheet" href="/static/css/jquery-ui/timepicker.css" type="text/css">
+<link rel="stylesheet" href="/static/css/ztree/zTreeStyle.css" type="text/css">
+<!--[if lt IE 7]><link rel="stylesheet" href="css/ie6.css" type="text/css"><![endif]-->
+<script src="/static/js/jquery/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
+<script src="/static/js/jquery/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="/static/js/jquery/jquery-ztree-2.5.min.js" type="text/javascript"></script>
+<script src="/static/js/highcharts/highcharts.js" type="text/javascript"></script>
+
+<script src="/static/js/create.js" type="text/javascript"></script>
+<script src="/static/js/zmon.$(username).js" type="text/javascript"></script>
+
+<!-- bootstrap使用的js和css -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-dropdown.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/docs.css" rel="stylesheet" media="screen">
+<!-- bootstrap使用的js和css -->
+<!-- jqgrid使用的js和css -->
+<script src="/static/jqgrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
+<script src="/static/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<link href="/static/jqgrid/css/ui-lightness/jquery-ui-custom.css" rel="stylesheet" />
+<link href="/static/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
+<!-- jqgrid使用的js和css --> 
+</head>
+<!--<body onload="getProduct()">-->
+<body>
+<!--  导航条  -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="pull-left brand" href="#">Zmon</a>
+	  <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li class="active"><a href="/zmon/">流量展示</a></li>
+          <li><a href="/zmon/flowstat">流量统计</a></li>
+		  <li><a href="/zmon/manage">监控管理</a></li>
+		  <li><a href="/zmon/alarm">报警管理</a></li>
+		  <li><a href="/zmon/create">监控新增</a></li>
+		  <li><a href="/static/beizhu.html">备注</a></li>
+		</ul>
+        <ul class="nav pull-right">
+		  <li><a>欢迎你，$username</a></li>
+		  <li><a href="/zmon/logout">退出</font></a></li>
+        </ul>
+	  </div><!--/.nav-collapse -->
+	</div>
+  </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+    <h1> &nbsp </h1>
+</div>
+
+<div class="container">
+<!-- Main hero unit for a primary marketing message or call to action -->
+     <div class="hero-unit span9 offset1">
+          <h1>Forbidden!</h1>
+          <p>&nbsp</p>
+          <p>您尚未开通产品线权限，请联系zmon管理员添加！</p>
+          <p>&nbsp</p>
+          <p><a class="btn btn-primary btn-large" href="mailto:zhaixinrui01@baidu.com">联系我们 »</a></p>
+      </div>
+</div>
+
+</body>
+<html>

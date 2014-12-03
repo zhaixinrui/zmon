@@ -1,0 +1,264 @@
+$def with (username, monitorId, product, monitorname, logpath, serviceName, grep, grepv, relist, treelist, hostlist)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="/static/js/modify.js"></script>
+
+<!-- bootstrap使用的js和css -->
+<script src="/static/js/jquery/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" >
+<link href="/static/bootstrap/css/docs.css" rel="stylesheet" media="screen">
+<!-- bootstrap使用的js和css -->
+
+<title>Zmon - 监控修改</title>
+</head>
+<body onload="initTemplate()">
+<!--  导航条  -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="pull-left brand" href="#">Zmon</a>
+	  <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li><a href="/zmon/">流量展示</a></li>
+          <li><a href="/zmon/flowstat">流量统计</a></li>
+		  <li><a href="/zmon/manage">监控管理</a></li>
+		  <li><a href="/zmon/alarm">报警管理</a></li>
+		  <li><a href="/zmon/create">监控新增</a></li>
+		  <li class="active"><a href="#">监控修改</a></li>
+		</ul>
+        <ul class="nav pull-right">
+		  <li><a>欢迎你，$username</a></li>
+		  <li><a href="/zmon/logout">退出</font></a></li>
+        </ul>
+	  </div><!--/.nav-collapse -->
+	</div>
+  </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+<h5> &nbsp </h5>
+</div>
+
+
+<div class="container">
+    <!--    第1步: 填写模块基本信息 -->
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>第1步: 填写模块基本信息</h4>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend">
+                <span class="add-on">&nbsp 产品线* &nbsp</span>
+                <select id="productline" name="select" disabled=true  style="width: 268px;">
+                    <option value ="$product">$product</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend">
+                <span class="add-on"> 监控项名* </span>
+                <input id="monitorname" type="text" placeholder="监控项的名字，不可与现有监控重名" style="width:270px" disabled=true value="$monitorname"/>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend">
+                <span class="add-on"> 日志路径* </span>
+                <input id="logpath" placeholder="日志文件名，请填全路径" type="text" style="width:270px" value="$logpath"/>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend span1">
+                <span class="add-on"> 机器列表* </span>
+            </div>
+                <div class="tabbable span3" style="margin-left:0.3%">
+                    <ul class="nav nav-tabs" style="margin-bottom:0px;">
+                         <li class="active"><a style="line-height: 12px;" data-toggle="tab" href="#hostnametab">机器名</a></li>
+                         <li class=""><a style="line-height: 12px;" data-toggle="tab" href="#bnstab">BNS</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="hostnametab" class="tab-pane active">
+                            <textarea id="hostName" placeholder="被监控机器的机器名，多个以回车分隔" style="width:270px;height:120px">$hostlist</textarea>
+                        </div>
+                        <div id="bnstab" class="tab-pane">
+                            <textarea id="serviceName" placeholder="被监控机器的BNS，多个以回车分隔" style="width:270px;height:120px">$serviceName</textarea>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend">
+                <span class="add-on"> 提取内容&nbsp </span>
+                <input id="grep" placeholder="只处理包含该字段的日志，即grep" type="text" style="width:270px" value="$grep"/>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid offset1">
+        <div class="span12">
+            <div class="input-prepend">
+                <span class="add-on"> 过滤内容&nbsp </span>
+                <input id="grep-v" placeholder="不处理包含该字段的日志，即grep -v" type="text" style="width:270px" value="$grepv"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第2步: 正则表达式提取关键值 -->
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>第2步: 正则表达式提取关键值</h4>
+            <p><small>为方便添加，提供了一些正则模板供大家选择，点击后会自动添加正则并自动设置相应的图表或节点。</small></p> 
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <p id="re_template"></p>
+            <div id="p_re" class="row-fluid">
+            </div>
+            $for reitem in relist:
+                <div id="$reitem[0]" class="re row-fluid">
+                    <div class="input-prepend span3 offset1">
+                        <label class="width-auto add-on">字段名</label> 
+                        <input class="re_name" id="re_name_$reitem[0]" type="text" value="$reitem[1]" disabled=true>
+                    </div>
+                    <div class="input-prepend span4">
+                        <label class="width-auto add-on">正则表达式</label>
+                        <input class="re_expr" type="text" value="$reitem[2]">
+                    </div>
+                    <div class="span4">
+                        <button class="btn" onclick=del($reitem[0])>删除</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" onclick=addre(p_re)>增加正则</button>
+            <a href="#testReModal" role="button" class="btn" data-toggle="modal">测试正则</a>
+        </div>
+    </div>
+
+    <!-- 第3步: 设置要展示的图表 -->
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>第3步: 设置要展示的图表</h4>
+            <p id="p_chart"><small>勾选作为图表展示的字段，所选字段的值必须为整形或者浮点型，以保证可以在图表中展示。图表默认显示周期内和值，如需展示周期内均值请勾选均值一项。</small></p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-bordered table-hover simple table-condensed">
+            <tbody> 
+            <tr id="charts" class="info"><td>字段名</td><td>是否展示为图表</td><td>是否使用均值</td></tr>
+            <tr class="chart">
+                <td><input type="button" class="chartname btn" value="flow" disabled=true></td>
+                <td><input type="checkbox" class="isused" disabled=true checked=true></td>
+                <td><input type="checkbox" class="isaverage" value="false" disabled=true></td> 
+            </tr>
+            $for reitem in relist:
+                <tr id="tr_$reitem[0]" class="chart">
+                    <td><input type="button" class="chartname btn" value="$reitem[1]" disabled=true></td>
+                    $if reitem[3] == True:
+                        <td><input type="checkbox" class="isused" checked=true></td>
+                    $else:
+                        <td><input type="checkbox" class="isused"></td>
+                    $if reitem[4] == 'average':
+                        <td><input type="checkbox" class="isaverage" checked=true></td> 
+                    $else:
+                        <td><input type="checkbox" class="isaverage"></td> 
+                </tr>
+            </tbody> 
+            </table>
+        </div>
+    </div>
+
+    <!-- 第4步: 设置树形菜单的节点展示-->
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>第4步: 设置树形菜单的节点展示</h4>
+            <p class="node">填写要展示的字段，字段的排列顺序决定字段在树形菜单中的层次。</p>
+            <div id="p_node" class="node row-fluid">
+            </div>
+    </div>
+    $for treeitem in treelist:
+        <div id="$treeitem[0]" class="node row-fluid">
+            <div class="input-prepend span3 offset1">
+                <label class="width-auto add-on">节点名</label>
+                <input class="node_name" type="text" id="re_name_$treeitem[1]" disabled=true value="$treeitem[1]">
+            </div>
+            <div class="input-prepend span3">
+                <label class="width-auto add-on">包含字段</label>
+                <input class="node_child" type="text" disabled=true value="$treeitem[2]">
+            </div>
+            <div class="span2">
+                <button class="btn" onclick=del($treeitem[0])>删除</button>
+            </div>
+        </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <button class="btn btn-info" onclick=addnode(p_node)>增加节点</button>
+        </div>
+    </div>
+    <!-- 提交 -->    
+    <div class="row-fluid">
+        <hr>
+        <div class="span2 offset9">
+            <button class="btn btn-warning" type="button">重置</button>
+            <button class="btn btn-primary" id="submit" type="button" onclick="submitModify($monitorId)">提交</button>
+        </div>
+    </div>
+</div>
+
+<!--  填坑  -->
+<div class="container">
+<h5> &nbsp </h5>
+</div>
+
+<div id="testReModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+           <h3>测试正则表达式</h3>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="span1 offset1"><label>日志文本</label></div>
+              <div class="span2"><textarea id="log_line" placeholder="请贴入一行日志" style="height:150px"></textarea></div>
+          </div>
+          <div class="row">
+              <div class="span1 offset1"><label>正则表达式</label></div>
+              <div class="span2"><input type="text" id="re_expr" placeholder="请填写正则"></div>
+          </div>
+          <div class="row">
+              <div class="span1 offset1"><label>返回值</label></div>
+              <div class="span2"><input type="text" id="testresult" placeholder="返回值" disabled=true></div>
+              <div class="span1"><a href="#" rel="tooltip" title="采集端匹配到None时会以0替代">备注</a></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+           <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+           <button class="btn btn-primary" onclick="testre()">测试</button>
+      </div>
+</div>
+</body>
+</html>
