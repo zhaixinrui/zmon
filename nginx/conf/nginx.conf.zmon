@@ -34,7 +34,7 @@ http {
 
     server {
         listen       80;
-        server_name  jx-space-god.jx.baidu.com;
+        server_name  www.test.com;
 
         #charset koi8-r;
 
