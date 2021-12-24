@@ -9,8 +9,7 @@ import logging
 import urllib
 import zmonlib
 
-#SSO_URL = 'http://uuap.baidu.com'
-SSO_URL = 'http://itebeta.baidu.com:8100'
+SSO_URL = 'http://www.xxx.com:8100'
 
 render = web.template.render('templates')
 class auth(object):
