@@ -1,7 +1,7 @@
 import web
 import urllib
 
-SSO_URL = 'http://itebeta.baidu.com:8100'
+SSO_URL = 'http://www.xxx.com:8100'
 
 def auth():
     sso_username = web.config.session.get('sso_username')
